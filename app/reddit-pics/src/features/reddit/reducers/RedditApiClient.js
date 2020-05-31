@@ -1,4 +1,6 @@
-import fetch from 'cross-fetch';
+//import fetch from 'cross-fetch';
+import 'cross-fetch/polyfill'
+
 
 export const fetchSubreddit  = async subredditName => {
     let apiResponse = await fetch(`https://www.reddit.com/r/${subredditName}.json`)
@@ -15,5 +17,5 @@ export const fetchSubreddit  = async subredditName => {
             id: post.id
         };
     })
-    return {posts: posts, before: apiResponse.data.before, after: apiResponse.data.after}
+    return {posts: posts, before: apiResponse.data.before, after: apiResponse.data.after, subreddit: subredditName}
 }

@@ -59,5 +59,6 @@ test('fetchSubreddit', async () => {
      })
      expect(result.before).toBe(null);
      expect(result.after).toBe('t3_gt66y5');
+     expect(result.subreddit).toBe('natureporn');
 });
 

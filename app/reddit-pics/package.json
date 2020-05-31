@@ -35,6 +35,6 @@
     ]
   },
   "devDependencies": {
-    "jest": "^26.0.1"
+    "fetch-mock": "^9.10.1"
   }
 }
