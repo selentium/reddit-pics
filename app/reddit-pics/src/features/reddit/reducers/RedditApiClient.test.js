@@ -3,9 +3,7 @@ import fetchMock from 'fetch-mock-jest'
 
 import {fetchSubreddit} from './RedditApiClient'
 
-test('dummy', () => {
-    expect(2 + 2).toBe(4);
-});
+
 
 test('fetchSubreddit', async () => {
    let listApiResponse = fs.readFileSync(__dirname + '/fixtures/reddit_list.json', 'utf8')
