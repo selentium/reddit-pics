@@ -11,3 +11,5 @@ export const DEFAULT_SUBREDDITS = [
     "LandscapePhotography",
     "natureporn"    
 ];
+
+export const FETCH_THRESHOLD = 5;
