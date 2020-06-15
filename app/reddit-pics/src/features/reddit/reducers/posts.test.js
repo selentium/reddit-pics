@@ -4,12 +4,15 @@ import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
 import fetchMock from 'fetch-mock-jest'
 
-import {postsSlice, fetchPosts, hasPrevPost, hasNextPost, needToFetch, currentPost} from './posts'
+import {postsSlice, fetchPosts, hasPrevPost, hasNextPost, needToFetch, currentPost, canFetch, canFetchSubreddit} from './posts'
 
 
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
+
+afterEach(() => fetchMock.restore());
+
 
 test('nextAction', () => {
    expect(postsSlice.actions.next()).toEqual({ type: "posts/next", payload: undefined });
@@ -20,6 +23,13 @@ test('prevAction', () => {
       type: "posts/prev",
       payload: undefined
    });
+});
+
+test('removeSubreddit', () => {
+   expect(postsSlice.actions.removeSubreddit('subreddit_name')).toEqual({
+      type: "posts/removeSubreddit",
+      payload: 'subreddit_name'
+   })
 });
 
 test('fetchPostsAction', async () => {
@@ -81,6 +91,7 @@ test('fetchPostsAction', async () => {
    expect(fetchPayload.before).toBe(null);
    expect(fetchPayload.after).toBe('t3_gt66y5');
 });
+
 
 
 
@@ -180,3 +191,93 @@ test('currentPost', () => {
    };
    expect(currentPost(state)).toBe(null);
 });
+
+test('canFetch', () => {
+    let state = {
+        posts: {
+           posts: [],
+           currentIndex: -1,
+           cursors: {}
+        }
+     };
+     expect(canFetch(state)).toBe(true);
+     state = {
+        posts: {
+           posts: ['post1', 'post2', 'post3'],
+           currentIndex: 0,
+           cursors: {
+               subreddit: {before: null, after: 'after'}
+           }
+        }
+     };
+     expect(canFetch(state)).toBe(true);
+     state = {
+        posts: {
+           posts: ['post1', 'post2', 'post3'],
+           currentIndex: 0,
+           cursors: {
+               subreddit: {before: null, after: null}
+           }
+        }
+     };
+     expect(canFetch(state)).toBe(false);
+});
+
+test('canFetchSubreddit', () => {
+    let state = {
+        posts: {
+           posts: [],
+           currentIndex: -1,
+           cursors: {}
+        }
+     };
+     expect(canFetchSubreddit(state, 'subreddit')).toBe(true);
+     state = {
+      posts: {
+         posts: [],
+         currentIndex: -1,
+         cursors: {subreddit: {after: null}}
+      }
+     };  
+     expect(canFetchSubreddit(state, 'subreddit')).toBe(false);
+
+     state = {
+      posts: {
+         posts: [],
+         currentIndex: -1,
+         cursors: {subreddit: {after: 'xxx'}}
+      }
+     };  
+     expect(canFetchSubreddit(state, 'subreddit')).toBe(true);
+
+});
+
+
+test('currentPost', () => {
+   let state = {
+      posts: {
+         posts: [],
+         currentIndex: -1,
+         cursors: {}
+      }
+   };
+   expect(currentPost(state)).toBe(null);
+   state = {
+      posts: {
+         posts: ['post1'],
+         currentIndex: 1,
+         cursors: {}
+      }
+   };
+   expect(currentPost(state)).toBe(null);
+   state = {
+      posts: {
+         posts: ['post1'],
+         currentIndex: 0,
+         cursors: {}
+      }
+   };
+   expect(currentPost(state)).toBe('post1');
+});
+
+

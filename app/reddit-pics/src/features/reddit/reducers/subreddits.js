@@ -4,19 +4,27 @@ import {AVAILABLE_SUBREDDITS, DEFAULT_SUBREDDITS} from '../settings.js'
 
 export const subredditsSlice = createSlice({
     name: 'subreddits',
-    initialState: DEFAULT_SUBREDDITS,
+    initialState: {subreddits: DEFAULT_SUBREDDITS, settingsOpen: false},
     reducers: {
         addSubreddit: (state, action) => {
             const sr = action.payload;
-            if (AVAILABLE_SUBREDDITS.includes(sr) && !state.includes(sr)) {
-                state.push(sr);
+            if (AVAILABLE_SUBREDDITS.includes(sr) && !state.subreddits.includes(sr)) {
+                state.subreddits.push(sr);
             }
         },
         removeSubreddit: (state, action) => {
-            const sr = action.payload, index = state.indexOf(sr);
+            const sr = action.payload, index = state.subreddits.indexOf(sr);
             if (index != -1) {
-                state.splice(index, 1);
+                state.subreddits.splice(index, 1);
             }
+        },
+        openSettings: (state, action) => {
+            state.settingsOpen = true;
+        },
+        closeSettings: (state, action) => {
+            state.settingsOpen = false;
         }
     }
 });
+
+export const availableSubreddits = AVAILABLE_SUBREDDITS;

@@ -2,8 +2,14 @@
 import 'cross-fetch/polyfill'
 
 
-export const fetchSubreddit  = async subredditName => {
-    let apiResponse = await fetch(`https://www.reddit.com/r/${subredditName}.json`)
+export const fetchSubreddit  = async (subredditName, after) => {
+    let apiResponse;
+    if (after) {
+        apiResponse = await fetch(`https://www.reddit.com/r/${subredditName}.json?after=${after}`)
+    }
+    else {
+        apiResponse = await fetch(`https://www.reddit.com/r/${subredditName}.json`)
+    }
     apiResponse = await apiResponse.json()
     let posts =  apiResponse.data.children.map(post => {
         post = post.data;
