@@ -12,7 +12,6 @@ export default function SubredditsDialog({ subreddits, availableSubreddits, sett
             disabled = 'disabled';
         }
         const handleChange = (e, sr) => {
-            console.log('handle change');
             if (e.target.checked) {
                 addSubreddit(sr);
             }

@@ -94,4 +94,13 @@ export const currentPost = state => {
     }
 };
 
+export const normalizePost = post => {
+    if (!post) return post
+    post = {...post}
+    post.subredditURL = 'https://www.reddit.com/r/' + post.subreddit
+    post.permalink = 'https://www.reddit.com' + post.permalink
+    post.authorURL = 'https://www.reddit.com/user/' + post.author + '/'
+    return post
+}
+
 

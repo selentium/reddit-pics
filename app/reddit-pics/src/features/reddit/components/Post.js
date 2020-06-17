@@ -5,14 +5,14 @@ const Post = ({ currentPost, hasPrevPost, hasNextPost, nextPost, prevPost }) => 
     if (hasPrevPost) {
         prevPostButton = (
             <div className="p-2">
-                <button onClick={(e) => {e.preventDefault(); prevPost(); document.querySelector("#image-title").scrollIntoView();}} className="btn ntn-sm btn-success">«</button>
+                <button onClick={(e) => {e.preventDefault(); prevPost(); document.querySelector("#image-title").scrollIntoView({behavior: 'smooth'});}} className="btn ntn-sm btn-success">«</button>
             </div>
         )
     }
     if (hasNextPost) {
         nextPostButton = (
             <div className="p-2">
-                <button onClick={(e) => {e.preventDefault(); nextPost(); document.querySelector("#image-title").scrollIntoView();}} className="btn ntn-sm btn-success">»</button>
+                <button onClick={(e) => {e.preventDefault(); nextPost(); document.querySelector("#image-title").scrollIntoView({behavior: 'smooth'});}} className="btn ntn-sm btn-success">»</button>
             </div>
         )
     }
@@ -22,7 +22,7 @@ const Post = ({ currentPost, hasPrevPost, hasNextPost, nextPost, prevPost }) => 
         <div className="p-2">
             <h4 id="image-title"><a href={currentPost.permalink}>{currentPost.title}</a></h4>
             <a href={currentPost.permalink}><img className="img-fluid" title={currentPost.title} alt={currentPost.title} src={imageSrc} /></a>
-            <p className="meta">From <a href="">r/{currentPost.subreddit}</a> by <a href="#">u/{currentPost.author}</a></p>
+            <p className="meta">From <a href={currentPost.subredditURL}>r/{currentPost.subreddit}</a> by <a href={currentPost.authorURL}>u/{currentPost.author}</a></p>
             <div className="d-flex justify-content-center">
                 {prevPostButton}
                 {nextPostButton}
