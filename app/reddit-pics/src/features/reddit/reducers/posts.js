@@ -43,7 +43,8 @@ export const postsSlice = createSlice({
             if (state.currentIndex > state.posts.length - 1) {
                 state.currentIndex = state.posts.length - 1;
             }
-        }
+        },
+
     },
     extraReducers: {
         [fetchPosts.fulfilled]: (state, action) => {

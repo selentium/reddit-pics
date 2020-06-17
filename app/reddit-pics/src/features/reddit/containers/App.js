@@ -43,7 +43,7 @@ const mapStateToProps = state => {
         hasNextPost: hasNextPost(state),
         needToFetch: needToFetch(state),
         canFetch: canFetch(state),
-        currentPost: normalizePost(currentPost(state)),
+        currentPost: normalizePost(currentPost(state))
     }
 }
 
@@ -57,7 +57,7 @@ const mapDispatchToProps = dispatch => {
         removeSubreddit: subreddit => dispatch(subredditsSlice.actions.removeSubreddit(subreddit)),
         openSettings: () => dispatch(subredditsSlice.actions.openSettings()),
         closeSettings: () => dispatch(subredditsSlice.actions.closeSettings()),
-        toggleSubreddit: (sr) => dispatch(subredditsSlice.actions.toggleSubreddit, sr)
+        toggleSubreddit: (sr) => dispatch(subredditsSlice.actions.toggleSubreddit, sr),
     }
 }
 

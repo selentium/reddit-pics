@@ -11,8 +11,14 @@ export const fetchSubreddit  = async (subredditName, after) => {
         apiResponse = await fetch(`https://www.reddit.com/r/${subredditName}.json`)
     }
     apiResponse = await apiResponse.json()
-    let posts =  apiResponse.data.children.map(post => {
+    let posts = apiResponse.data.children.map(post => {
         post = post.data;
+        if (!post.hasOwnProperty('preview')) {
+            return null;
+        }
+        if (post.preview.images[0].source.url.includes('https://external-preview.redd.it/')) {
+            return null;
+        }
         return {
             subreddit: subredditName,
             title: post.title,
@@ -23,5 +29,6 @@ export const fetchSubreddit  = async (subredditName, after) => {
             id: post.id
         };
     })
+    posts = posts.filter((p) => p != null)
     return {posts: posts, before: apiResponse.data.before, after: apiResponse.data.after, subreddit: subredditName}
 }
