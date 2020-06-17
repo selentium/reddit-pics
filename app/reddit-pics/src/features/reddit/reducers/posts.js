@@ -100,6 +100,9 @@ export const normalizePost = post => {
     post.subredditURL = 'https://www.reddit.com/r/' + post.subreddit
     post.permalink = 'https://www.reddit.com' + post.permalink
     post.authorURL = 'https://www.reddit.com/user/' + post.author + '/'
+    let imageSrc = post.image_resolutions[post.image_resolutions.length - 1].url
+    imageSrc = imageSrc.replace(/&amp;/g, '&')
+    post.imageSrc = imageSrc
     return post
 }
 

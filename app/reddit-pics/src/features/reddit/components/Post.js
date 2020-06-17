@@ -16,12 +16,11 @@ const Post = ({ currentPost, hasPrevPost, hasNextPost, nextPost, prevPost }) => 
             </div>
         )
     }
-    let imageSrc = currentPost.image_resolutions[currentPost.image_resolutions.length - 1].url
-    imageSrc = imageSrc.replace(/&amp;/g, '&')
+
     return (
         <div className="p-2">
             <h4 id="image-title"><a href={currentPost.permalink}>{currentPost.title}</a></h4>
-            <a href={currentPost.permalink}><img className="img-fluid" title={currentPost.title} alt={currentPost.title} src={imageSrc} /></a>
+            <a href={currentPost.permalink}><img className="img-fluid" title={currentPost.title} alt={currentPost.title} src={currentPost.imageSrc} /></a>
             <p className="meta">From <a href={currentPost.subredditURL}>r/{currentPost.subreddit}</a> by <a href={currentPost.authorURL}>u/{currentPost.author}</a></p>
             <div className="d-flex justify-content-center">
                 {prevPostButton}
