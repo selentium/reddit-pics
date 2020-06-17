@@ -14,3 +14,5 @@ export const DEFAULT_SUBREDDITS = [
 
 
 export const FETCH_THRESHOLD = 5;
+
+export const SITE_TITLE = "Nature Pics"

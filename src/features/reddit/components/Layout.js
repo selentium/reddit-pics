@@ -2,6 +2,7 @@ import React from 'react'
 
 import Post from './Post'
 import SubredditsDialog from './SubredditsDialog'
+import {SITE_TITLE} from '../settings'
 
 
 
@@ -22,7 +23,7 @@ const Layout = (props) => {
         <div>
             <header>
                 <nav className="navbar navbar-light bg-light">
-                    <a className="navbar-brand" href="#">Reddit Pics</a>
+                    <span className="navbar-brand">{SITE_TITLE}</span>
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <a href="#" onClick={(e) => { e.preventDefault(); props.openSettings(); }}>Settings</a>
