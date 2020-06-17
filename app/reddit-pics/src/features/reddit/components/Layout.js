@@ -42,6 +42,7 @@ const Layout = (props) => {
                 subreddits={props.subreddits}
                 availableSubreddits={props.availableSubreddits}
                 settingsOpen={props.settingsOpen}
+                canRemoveSubreddit={props.canRemoveSubreddit}
                 closeSettings={() => props.closeSettings()}
                 addSubreddit={(sr) => props.addSubreddit(sr)}
                 removeSubreddit={(sr) => props.removeSubreddit(sr)}

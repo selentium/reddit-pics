@@ -28,3 +28,5 @@ export const subredditsSlice = createSlice({
 });
 
 export const availableSubreddits = AVAILABLE_SUBREDDITS;
+
+export const canRemoveSubreddit = (state) => state.subreddits.subreddits.length > 1;

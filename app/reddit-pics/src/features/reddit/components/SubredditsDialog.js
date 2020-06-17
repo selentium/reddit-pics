@@ -1,12 +1,16 @@
 import React from 'react'
 
-export default function SubredditsDialog({ subreddits, availableSubreddits, settingsOpen, closeSettings, addSubreddit, removeSubreddit, removeSubredditFromPosts }) {
+export default function SubredditsDialog({ subreddits, availableSubreddits, settingsOpen, closeSettings, addSubreddit, removeSubreddit, removeSubredditFromPosts, canRemoveSubreddit }) {
     let display = settingsOpen ? 'block' : 'none';
 
 
     const subredditsMarkup = availableSubreddits.map((subreddit) => {
         let id = "checkbox-" + subreddit
         let checked = subreddits.includes(subreddit) ? 'checked' : '';
+        let disabled = '';
+        if ((checked == 'checked') && !canRemoveSubreddit) {
+            disabled = 'disabled';
+        }
         const handleChange = (e, sr) => {
             console.log('handle change');
             if (e.target.checked) {
@@ -19,7 +23,7 @@ export default function SubredditsDialog({ subreddits, availableSubreddits, sett
         }
         return (
             <div className="form-check" key={subreddit}>
-                <input className="form-check-input" type="checkbox" checked={checked}  onChange={(e) => handleChange(e, subreddit)} id={id} />
+                <input className="form-check-input" type="checkbox" checked={checked} disabled={disabled}  onChange={(e) => handleChange(e, subreddit)} id={id} />
                 <label className="form-check-label" htmlFor={id}>
                     {subreddit}
                 </label>

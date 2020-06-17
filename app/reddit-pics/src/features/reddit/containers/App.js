@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
 import {hasPrevPost, hasNextPost, needToFetch, canFetch, currentPost, postsSlice, fetchPosts} from '../reducers/posts'
-import {availableSubreddits, subredditsSlice} from '../reducers/subreddits'
+import {availableSubreddits, subredditsSlice, canRemoveSubreddit} from '../reducers/subreddits'
 
 import Layout from '../components/Layout'
 
@@ -38,11 +38,12 @@ const mapStateToProps = state => {
         subreddits: state.subreddits.subreddits,
         availableSubreddits: availableSubreddits,
         settingsOpen: state.subreddits.settingsOpen,
+        canRemoveSubreddit: canRemoveSubreddit(state),
         hasPrevPost: hasPrevPost(state),
         hasNextPost: hasNextPost(state),
         needToFetch: needToFetch(state),
         canFetch: canFetch(state),
-        currentPost: currentPost(state)
+        currentPost: currentPost(state),
     }
 }
 
