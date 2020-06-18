@@ -1,1 +1,1 @@
-This project is just a demo that I created when I learned [Redux](https://redux.js.org/). It displays pictures from several subreddits. You can take a look at [demo](https://selentium.github.io/)
+This project is just a demo that I created when I learned [Redux](https://redux.js.org/). It displays pictures from several subreddits. You can take a look at [demo](https://selentium.github.io/).
